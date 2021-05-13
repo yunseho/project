@@ -3,5 +3,6 @@ let join = (req,res) => {
 }
 
 module.exports = {
-    join,
+    join:join,
+    seho:'hi'
 }

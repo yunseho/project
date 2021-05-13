@@ -4,7 +4,7 @@ const nunjucks = require('nunjucks');
 const bodyParser = require('body-parser');
 const sequelize = require('./models');
 const router = require('./router')
-
+console.log(router);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.set('view engine', 'html');
 
