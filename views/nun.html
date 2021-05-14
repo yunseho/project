@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/user" method="post">
+        <ul>
+            <li>아이디</li>
+            <li><input type="text" name="userid"></li>
+        </ul>
+        <ul>
+            <li>비밀번호</li>
+            <li><input type="password" name="userpw"></li>
+        </ul>
+        <ul>
+            <li>비밀번호 재확인</li>
+            <li><input type="password" id="userpw_check"></li>
+        </ul>
+        <ul>
+            <li>이름</li>
+            <li><input type="text" name="username"></li>
+        </ul>
+        <ul>
+            <li>성별</li>
+            <li>
+                <input type="radio" id="gender" name="gender" value="0">남자
+                <input type="radio" id="gender" name="gender" value="1">여자
+            </li>
+        </ul>
+        <input type="submit" value="회원가입완료">
+    </form>
+</body>
+</html>

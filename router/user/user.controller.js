@@ -1,8 +1,7 @@
 let join = (req,res) => {
-    res.send('user join입니다.');
+    res.render('nun.html');
 }
 
 module.exports = {
     join:join,
-    seho:'hi'
 }
