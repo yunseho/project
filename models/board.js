@@ -9,16 +9,10 @@
 */
 
 const Sequelize = require('sequelize');
-const moment = require('moment');
 
 module.exports = class board extends Sequelize.Model{
     static init(sequelize){
         return super.init({
-            idx:{
-                type:Sequelize.INTEGER(11),
-                allowNull:false, 
-                unique:true, 
-            },
             subject:{
                 type:Sequelize.STRING(100),
                 allowNull:false,
@@ -31,27 +25,26 @@ module.exports = class board extends Sequelize.Model{
                 type:Sequelize.text,
                 allowNull:false,
             },
-            today:{
-                type:Sequelize.DATEONLY,
+            created_at:{
+                type:Sequelize.DATE,
                 allowNull:false,
                 defaultValue:Sequelize.NOW,
-                get: function(){
-                    return moment(this.getDateValue('boarddt')).format('YYYY-MM-DD')
             },
             hit:{
                type:Sequelize.INTEGER(11),
                defaultValue:0,
-               auto_increment=1,
-            }
+               
+            },
         },{
             sequelize,
             timestamps:false,
             underscored:false,
             paranoid:false,
             modelName:'Board',
-            tableName:'board',
+            tableName:'boards',
             charset:'utf8',
             collate:'utf8_general_ci'
-        });
+        })
     }
-}
+    static associate(db){}
+};
