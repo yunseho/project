@@ -23,6 +23,9 @@
    
         <div class="Weather wt50">
             <h2>오늘 날씨</h2>
+            <div id="weather_view">
+                
+            </div>
         </div>
 
         <div class="Home wt50">
@@ -48,9 +51,10 @@ document.querySelector(".Home").addEventListener('click', function () {
 
     fetch('http://localhost:3000/saying') // new Promise 
     .then(data => {
-        return data.text();
+        return data.text(); // new Promise
     })
     .then(text => {
+        console.log(text);
         document.querySelector("#Home_view").innerHTML = text;
     })
 });
@@ -59,6 +63,15 @@ document.querySelector(".Weather").addEventListener('click', function () {
     document.querySelector(".Weather").style.height ="100%";
     document.querySelector(".Weather").style.top ="0%";
     document.querySelector(".Home").style.top="100%";
+
+    fetch('http://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=20313df3cc7ccf0b314fd37d36732f83&lang=kr&&units=metric')
+    .then(data=>{
+        return data.json();
+    })
+    .then(json => {
+        console.log(json);
+        document.querySelector('#weather_view').innerHTML = json.main.temp;
+    })
 });
 document.querySelector(".join").addEventListener('click', function () {
     document.querySelector(".join").style.width ="100%";

@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const {sequelize} = require('./models');
 const router = require('./router')
 
-
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.set('view engine', 'html');
