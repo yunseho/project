@@ -24,8 +24,12 @@
         <div class="Weather wt50">
             <h2>오늘 날씨</h2>
         </div>
-            <div class="Home wt50">
+
+        <div class="Home wt50">
             <h2>오늘의 명언</h2>
+            <div id="Home_view" style="display:none;">
+            
+            </div> 
         </div>
       
         <label id="userId">
@@ -40,6 +44,15 @@ document.querySelector(".Home").addEventListener('click', function () {
     document.querySelector(".Home").style.width ="100%"
     document.querySelector(".Home").style.height ="100%";
     document.querySelector(".Home").style.top ="0%";
+    document.querySelector("#Home_view").style.display = 'block';
+
+    fetch('http://localhost:3000/saying') // new Promise 
+    .then(data => {
+        return data.text();
+    })
+    .then(text => {
+        document.querySelector("#Home_view").innerHTML = text;
+    })
 });
 document.querySelector(".Weather").addEventListener('click', function () {
     document.querySelector(".Weather").style.width ="100%";
@@ -66,6 +79,7 @@ document.querySelector("#userId").addEventListener('click',()=>{
     document.querySelector(".Home").style.width ="65%"
     document.querySelector(".Home").style.height ="562px";
     document.querySelector(".Home").style.top ="20%";
+    document.querySelector("#Home_view").style.display = 'none';
 
     document.querySelector(".Weather").style.width ="65%";
     document.querySelector(".Weather").style.height ="562px";

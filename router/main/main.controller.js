@@ -1,5 +1,5 @@
 let main = (req,res) => {
-    res.send('main page입니다.');
+    res.render('index.html')
 }
 
 module.exports = {

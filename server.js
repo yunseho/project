@@ -2,11 +2,11 @@ const express = require('express');
 const app = express();
 const nunjucks = require('nunjucks');
 const bodyParser = require('body-parser');
-const sequelize = require('./models');
+const {sequelize} = require('./models');
 const router = require('./router')
 
-const{ Sequelize } =require('./models');
-console.log(router);
+
+app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.set('view engine', 'html');
 
