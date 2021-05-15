@@ -1,7 +1,7 @@
-let join = (req,res) => {
-    res.render('nun.html');
-}
 
+let login = (req,res)=>{
+    res.render('login.html')
+}
 module.exports = {
-    join:join,
+    login,
 }

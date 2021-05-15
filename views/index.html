@@ -16,7 +16,7 @@
         </div>
        
         <div class="join wt50">
-            <h2> 회원가입/로그인</h2>
+            <h2 class="bt"> 회원가입/로그인</h2>
             <div id="join_view">
          
             </div>
@@ -76,21 +76,23 @@ document.querySelector(".Weather").addEventListener('click', function () {
     
 });
 
-// document.querySelector(".join").addEventListener('click', function () {
-//     document.querySelector(".join").style.width ="100%";
-//     document.querySelector(".join").style.height ="100%";
-//     document.querySelector(".join").style.top ="0%";
-//     document.querySelector(".Home").style.top="100%";
-//     document.querySelector(".Weather").style.top="100%";
+document.querySelector(".bt").addEventListener('click', function () {
+    document.querySelector(".join").style.width ="100%";
+    document.querySelector(".join").style.height ="100%";
+    document.querySelector(".join").style.top ="0%";
+    document.querySelector(".Home").style.top="100%";
+    document.querySelector(".Weather").style.top="100%";
 
-//     fetch('http://localhost:3000/user')
-//     .then(data => {
-//         return data.text();
-//     })
-//     .then(text => {
-//         document.querySelector("#join_view").innerHTML = text;
-//     })
-// });
+    fetch('http://localhost:3000/user')
+    .then(data => {
+        
+        return data.text();
+    })
+    .then(text => {
+        
+        document.querySelector("#join_view").innerHTML = text;
+    })
+});
 
 
 let btn  = document.querySelector('.join');
@@ -139,7 +141,7 @@ document.querySelector("#userId").addEventListener('click',()=>{
     document.querySelector(".ToDo").style.height ="562px";
     document.querySelector(".ToDo").style.top ="8%";
 
-    let d1 = document.querySelector('.Home');
+   
 })
 </script>
 
