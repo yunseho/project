@@ -6,30 +6,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="index.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script type="text/javascript">
-    // document.addEventListener("DOMContentLoaded",init);
-    // function init(){
-    //     console.log('aaa');
-    //     const joinBtn = document.querySelector('bt_1');
-    //     console.log(joinBtn);
-    // }
 
     function joinBtn(){
-        console.log('click');
         fetch('http://localhost:3000/user/join') // new Promise 
         .then(data => {
             return data.text(); // new Promise
         })
         .then(text => {
-            console.log(text);
             document.querySelector("#join_view").innerHTML = text;
         })
+    }
+     const userid = document.querySelector('#userid')
+    async function userid_check(){
+        let wow = await axios.get(`http://localhost:3000/user/join?userid=${userid.value}`);
+        console.log(wow);
+        //ajax로 가져왔다 가정 중복 false 중복아니다 true
+        //서버에 보내서 데이터를 조회하고 결과가 조회되면 트루 안되면 펄스 중복이냐 아니냐
+        login_flag = wow.data.login;
+        console.log(login_flag)
+        if(login_flag){
+            userid_msg.innerHTML = '올바른 아이디입니다.'
+            userid_msg.style.color = 'green';
+        }else{
+            userid_msg.innerHTML = '중복된 아이디입니다.'
+            userid_msg.style.color = 'black';
+        }
     }
     </script>
 </head>
 <body>
     
 <div id="wrap">
+    <div class="tt">
+        {{userid}}<br/>
+        {{name}}
+        로그인접속유무
+    </div>
     <div id="content">
         <div class="ToDo wt50">
             <h2>게시판</h2>
@@ -42,14 +56,14 @@
             </div>
         </div>
    
-        <div class="Weather wt50"style="display:none;">
+        <div class="Weather wt50">
             <h2>오늘 날씨</h2>
             <div id="weather_view">
                 
             </div>
         </div>
 
-        <div class="Home wt50"style="display:none;">
+        <div class="Home wt50">
             <h2>오늘의 명언</h2>
             <div id="Home_view" style="display:none;">
             
@@ -111,7 +125,7 @@ document.querySelector(".bt").addEventListener('click', function () {
         
     })
     .then(text => {
-        console.log(text)
+       
         document.querySelector("#join_view").innerHTML = text;
     })
 });

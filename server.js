@@ -4,12 +4,13 @@ const nunjucks = require('nunjucks');
 const bodyParser = require('body-parser');
 const {sequelize} = require('./models');
 const router = require('./router')
+const {User} = require('./models');
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.set('view engine', 'html');
 
-sequelize.sync({ force:true })
+sequelize.sync({ force:false })
 .then(() => {
     console.log('데이터 베이스 성공');
 })
@@ -17,9 +18,11 @@ sequelize.sync({ force:true })
     console.error(err);
 });
 
+
 nunjucks.configure('views', {
     express: app
 });
+ 
 app.use(express.json());
 app.use('/',router);
 
