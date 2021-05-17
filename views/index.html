@@ -6,6 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="index.css">
+    <script type="text/javascript">
+    // document.addEventListener("DOMContentLoaded",init);
+    // function init(){
+    //     console.log('aaa');
+    //     const joinBtn = document.querySelector('bt_1');
+    //     console.log(joinBtn);
+    // }
+
+    function joinBtn(){
+        console.log('click');
+        fetch('http://localhost:3000/user/join') // new Promise 
+        .then(data => {
+            return data.text(); // new Promise
+        })
+        .then(text => {
+            console.log(text);
+            document.querySelector("#join_view").innerHTML = text;
+        })
+    }
+    </script>
 </head>
 <body>
     
@@ -22,14 +42,14 @@
             </div>
         </div>
    
-        <div class="Weather wt50">
+        <div class="Weather wt50"style="display:none;">
             <h2>오늘 날씨</h2>
             <div id="weather_view">
                 
             </div>
         </div>
 
-        <div class="Home wt50">
+        <div class="Home wt50"style="display:none;">
             <h2>오늘의 명언</h2>
             <div id="Home_view" style="display:none;">
             
@@ -82,38 +102,40 @@ document.querySelector(".bt").addEventListener('click', function () {
     document.querySelector(".join").style.top ="0%";
     document.querySelector(".Home").style.top="100%";
     document.querySelector(".Weather").style.top="100%";
+    document.querySelector("#join_view").style.display='block'
 
     fetch('http://localhost:3000/user')
     .then(data => {
-        
+        console.log(data)
         return data.text();
+        
     })
     .then(text => {
-        
+        console.log(text)
         document.querySelector("#join_view").innerHTML = text;
     })
 });
 
 
-let btn  = document.querySelector('.join');
+// let btn  = document.querySelector('.join');
 
-let btn_10 = function(){
-    document.querySelector(".join").style.width ="100%";
-    document.querySelector(".join").style.height ="100%";
-    document.querySelector(".join").style.top ="0%";
-    document.querySelector(".Home").style.top="100%";
-    document.querySelector(".Weather").style.top="100%";
+// let btn_10 = function(){
+//     document.querySelector(".join").style.width ="100%";
+//     document.querySelector(".join").style.height ="100%";
+//     document.querySelector(".join").style.top ="0%";
+//     document.querySelector(".Home").style.top="100%";
+//     document.querySelector(".Weather").style.top="100%";
 
-    fetch('http://localhost:3000/user')
-    .then(data => {
-        return data.text();
-    })
-    .then(text => {
-        document.querySelector("#join_view").innerHTML = text;
-    })
-    btn.removeEventListener('click',btn_10);
-}
-btn.addEventListener('click',btn_10);
+//     fetch('http://localhost:3000/user')
+//     .then(data => {
+//         return data.text();
+//     })
+//     .then(text => {
+//         document.querySelector("#join_view").innerHTML = text;
+//     })
+//     btn.removeEventListener('click',btn_10);
+// }
+// btn.addEventListener('click',btn_10);
 
 document.querySelector(".ToDo").addEventListener('click', function () {
     document.querySelector(".ToDo").style.width ="100%";
@@ -123,6 +145,7 @@ document.querySelector(".ToDo").addEventListener('click', function () {
     document.querySelector(".Weather").style.top="100%";
     document.querySelector(".join").style.top="100%";
 });
+
 document.querySelector("#userId").addEventListener('click',()=>{
     document.querySelector(".Home").style.width ="65%"
     document.querySelector(".Home").style.height ="562px";
@@ -136,14 +159,15 @@ document.querySelector("#userId").addEventListener('click',()=>{
     document.querySelector(".join").style.width ="65%";
     document.querySelector(".join").style.height ="562px";
     document.querySelector(".join").style.top ="12%";
+    document.querySelector("#join_view").style.display='none';
 
     document.querySelector(".ToDo").style.width ="65%";
     document.querySelector(".ToDo").style.height ="562px";
-    document.querySelector(".ToDo").style.top ="8%";
-
-   
+    document.querySelector(".ToDo").style.top ="8%"; 
 })
 </script>
+
+
 
 </body>
 </html>

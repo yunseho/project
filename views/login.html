@@ -23,28 +23,9 @@
     </div>
 </form>
 
-<button class="bt_1">회원가입</button>
-    <div id="view">
+<a href="/user/join">회원가입</a>
+<button class="bt_1" onclick="joinBtn()">asdadas</button>
+<div id="view">
 
-    </div>
+</div>
     
-    
-    
-    <script type="text/javascript">
-  
-    document.querySelector(".bt_1").addEventListener('click', function () {
-        console.log('asdas')
-    fetch('http://localhost:3000/user_join')
-    .then(data => {
-        console.log(data)
-        return data.text();
-    })
-    .then(text1 => {
-        console.log(text)
-        document.querySelector("#view").innerHTML = text;
-    })
-});
-
-    </script>
-</body>
-</html>

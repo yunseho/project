@@ -9,7 +9,7 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.set('view engine', 'html');
 
-sequelize.sync({ force:false })
+sequelize.sync({ force:true })
 .then(() => {
     console.log('데이터 베이스 성공');
 })
