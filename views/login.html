@@ -23,27 +23,39 @@
     </div>
 </form>
 
-<button class="bt_1">회원가입</button>
+   
+<button class="trigger" onclick="on()">회원가입</button>
+<input type="button" value="회원가입" onclick="at();">
+
     <div id="view">
 
     </div>
     
     
-    
     <script type="text/javascript">
-  
-    document.querySelector(".bt_1").addEventListener('click', function () {
-        console.log('asdas')
+
+
+
+
+  let bt = function at() {
+    console.log('asdas')
+    document.querySelector(".join").style.width ="100%";
+    document.querySelector(".join").style.height ="100%";
+    document.querySelector(".join").style.top ="0%";
+    document.querySelector(".Home").style.top="100%";
+    document.querySelector(".Weather").style.top="100%";
     fetch('http://localhost:3000/user_join')
     .then(data => {
-        console.log(data)
+        console.log(fetch('http://localhost:3000/user_join'))
         return data.text();
     })
-    .then(text1 => {
+    .then(text => {
         console.log(text)
-        document.querySelector("#view").innerHTML = text;
+        document.querySelector("#join_view").innerHTML = text;
     })
-});
+  }
+
+
 
     </script>
 </body>

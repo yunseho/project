@@ -1,5 +1,5 @@
 let index = (req,res)=>{
-    res.send('<b>환영합니다~~~~~</b>')
+    res.render('home.html')
 }
 
 module.exports = {

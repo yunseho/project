@@ -6,6 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="index.css">
+    <script type="text/javascript">
+     function on(){
+        fetch('http//:localhost:3000/user_join')
+        .then(data=>{
+            return data.text();
+        })
+        .then(text=>{
+            document.querySelector('#join_view').innerHTML=text;
+        })
+
+        
+    }
+    </script>
 </head>
 <body>
     
@@ -13,12 +26,13 @@
     <div id="content">
         <div class="ToDo wt50">
             <h2>게시판</h2>
+           
         </div>
        
         <div class="join wt50">
             <h2 class="bt"> 회원가입/로그인</h2>
             <div id="join_view">
-         
+
             </div>
         </div>
    
@@ -30,7 +44,7 @@
         </div>
 
         <div class="Home wt50">
-            <h2>오늘의 명언</h2>
+            <h2 class="bt2">오늘의 명언</h2>
             <div id="Home_view" style="display:none;">
             
             </div> 
@@ -42,9 +56,34 @@
             <span class="sp"></span>
         </label>
     </div>
+    
 </div>
 <script type="text/javascript">
-document.querySelector(".Home").addEventListener('click', function () {
+const quoteText = document.querySelector(".quote__text");
+const quoteAutor = document.querySelector(".quote__author");
+
+function getQuote() {
+    function randomItem(a) {
+        return a[Math.floor(Math.random() * a.length)];
+    }
+
+    fetch("https://type.fit/api/quotes")
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            const random = randomItem(data);
+            const author = random.author;
+            const text = random.text;
+            quoteText.innerText = `${text}`;
+            quoteAutor.innerText = `- ${author} -`;
+        });
+}
+
+document.querySelector(".Home").addEventListener('click',getQuote());
+
+
+document.querySelector(".bt2").addEventListener('click', function () {
     document.querySelector(".Home").style.width ="100%"
     document.querySelector(".Home").style.height ="100%";
     document.querySelector(".Home").style.top ="0%";
@@ -95,25 +134,27 @@ document.querySelector(".bt").addEventListener('click', function () {
 });
 
 
-let btn  = document.querySelector('.join');
 
-let btn_10 = function(){
-    document.querySelector(".join").style.width ="100%";
-    document.querySelector(".join").style.height ="100%";
-    document.querySelector(".join").style.top ="0%";
-    document.querySelector(".Home").style.top="100%";
-    document.querySelector(".Weather").style.top="100%";
 
-    fetch('http://localhost:3000/user')
-    .then(data => {
-        return data.text();
-    })
-    .then(text => {
-        document.querySelector("#join_view").innerHTML = text;
-    })
-    btn.removeEventListener('click',btn_10);
-}
-btn.addEventListener('click',btn_10);
+// let btn  = document.querySelector('.join');
+
+// let btn_10 = function(){
+//     document.querySelector(".join").style.width ="100%";
+//     document.querySelector(".join").style.height ="100%";
+//     document.querySelector(".join").style.top ="0%";
+//     document.querySelector(".Home").style.top="100%";
+//     document.querySelector(".Weather").style.top="100%";
+
+//     fetch('http://localhost:3000/user')
+//     .then(data => {
+//         return data.text();
+//     })
+//     .then(text => {
+//         document.querySelector("#join_view").innerHTML = text;
+//     })
+//     btn.removeEventListener('click',btn_10);
+// }
+// btn.addEventListener('click',btn_10);
 
 document.querySelector(".ToDo").addEventListener('click', function () {
     document.querySelector(".ToDo").style.width ="100%";
@@ -140,9 +181,8 @@ document.querySelector("#userId").addEventListener('click',()=>{
     document.querySelector(".ToDo").style.width ="65%";
     document.querySelector(".ToDo").style.height ="562px";
     document.querySelector(".ToDo").style.top ="8%";
-
-   
 })
+
 </script>
 
 </body>
