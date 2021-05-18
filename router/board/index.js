@@ -11,7 +11,8 @@ router.use('/', pageRouter);
 router.use('/auth', authRouter);
 router.use('/post', postRouter);
 router.use('/user', userRouter);
+router.use('/page', pageRouter);
 
-router.get('/board',controller.board);
+//router.get('/board',controller.board);
 
 module.exports = router;

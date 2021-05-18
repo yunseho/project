@@ -3,11 +3,13 @@ let main = (req,res) => {
     username = req.session.username
     isLogin = req.session.isLogin
     flag = req.query.flag
+    type = req.query.type
     res.render('index.html',{
         userid,
         username,
         flag,
-        isLogin
+        isLogin,
+        type
     })
 }
 

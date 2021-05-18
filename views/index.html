@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="index.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
    
+    {% if type == 'close' %}
+    <script type="text/javascript">
+        window.close();
+    </script>
+    {% endif %}
     <script type="text/javascript">
   
     function joinBtn(){
@@ -120,12 +125,15 @@
         {{userid}}<br/>
         {{username}}<br/>
         {% if isLogin %}
-        <a href='./user/logout'>로그아웃합시다</a>
+        <a href='./user/logout'>갈겨?</a>
         {% endif %}
     </div>
     <div id="content">
         <div class="ToDo wt50" style="opacity: 1;">
-            <h2>게시판</h2>
+            <h2 class="tb">게시판</h2>
+            <div id="board_view">
+         
+            </div>
         </div>
        
         <div class="join wt50" style="opacity: 1;">
@@ -145,7 +153,7 @@
         <div class="Home wt50">
             <h2>테트리스 게임</h2>
             <div id="Home_view" style="display:none;">
-            
+                <iframe src="http://localhost:3000/html/index.html" height=700 width=750 style="border:none;"></iframe>
             </div> 
         </div>
       
@@ -162,7 +170,7 @@ document.querySelector(".Home").addEventListener('click', function () {
     document.querySelector(".Home").style.height ="100%";
     document.querySelector(".Home").style.top ="0%";
     document.querySelector("#Home_view").style.display = 'block';
-
+    /*
     fetch('http://localhost:3000/saying') // new Promise 
     .then(data => {
         return data.text(); // new Promise
@@ -171,6 +179,7 @@ document.querySelector(".Home").addEventListener('click', function () {
         console.log(text);
         document.querySelector("#Home_view").innerHTML = text;
     })
+    */
 });
 document.querySelector(".Weather").addEventListener('click', function () {
     document.querySelector(".Weather").style.width ="100%";
@@ -184,6 +193,8 @@ document.querySelector(".Weather").addEventListener('click', function () {
         return data.json();
     })
     .then(json => {
+       
+        
         console.log(json);
         document.querySelector('#weather_view').innerHTML = json.main.temp;
     })
@@ -233,16 +244,52 @@ document.querySelector(".bt").addEventListener('click', function () {
 // }
 // btn.addEventListener('click',btn_10);
 
-document.querySelector(".ToDo").addEventListener('click', function () {
-    document.querySelector(".ToDo").style.width ="100%";
-    document.querySelector(".ToDo").style.height ="100%";
-    document.querySelector(".ToDo").style.top ="0%";
-    document.querySelector(".Home").style.top="100%";
-    document.querySelector(".Home").style.opacity="0";
-    document.querySelector(".Weather").style.top="100%";
-    document.querySelector(".Weather").style.opacity="0";
-    document.querySelector(".join").style.top="100%";
-    document.querySelector(".join").style.opacity="0";
+document.querySelector(".tb").addEventListener('click', function (event) {
+    if(event.type == 'click' && document.querySelector(".ToDo").style.width !== "100%"){
+        document.querySelector(".ToDo").style.width ="100%";
+        document.querySelector(".ToDo").style.height ="100%";
+        document.querySelector(".ToDo").style.top ="0%";
+        document.querySelector(".Home").style.top="100%";
+        document.querySelector(".Home").style.opacity="0";
+        document.querySelector(".Weather").style.top="100%";
+        document.querySelector(".Weather").style.opacity="0";
+        document.querySelector(".join").style.top="100%";
+        document.querySelector(".join").style.opacity="0";
+
+        //http://localhost:3000/board/
+        let url = 'http://localhost:8001/board/';
+        fetch(url)
+        .then(result => {
+            return result.text();
+        })
+        .then(text => {
+            document.querySelector('#board_view').innerHTML = text;
+        })
+    } else {
+        document.querySelector(".Home").style.width ="65%"
+        document.querySelector(".Home").style.height ="562px";
+        document.querySelector(".Home").style.top ="20%";
+        document.querySelector("#Home_view").style.display = 'none';
+
+
+        document.querySelector(".Weather").style.width ="65%";
+        document.querySelector(".Weather").style.height ="562px";
+        document.querySelector(".Weather").style.top="16%";
+        document.querySelector(".Weather").style.opacity="1";
+        document.querySelector(".Home").style.opacity="1";
+
+        document.querySelector(".join").style.width ="65%";
+        document.querySelector(".join").style.height ="562px";
+        document.querySelector(".join").style.top ="12%";
+        document.querySelector(".join").style.opacity="1";
+        document.querySelector("#join_view").style.display='none';
+
+        document.querySelector(".ToDo").style.width ="65%" ;
+        document.querySelector(".ToDo").style.height ="562px";
+        document.querySelector(".ToDo").style.top ="8%"; 
+    }
+    
+
 });
 
 document.querySelector("#userId").addEventListener('click',()=>{
@@ -268,6 +315,37 @@ document.querySelector("#userId").addEventListener('click',()=>{
     document.querySelector(".ToDo").style.height ="562px";
     document.querySelector(".ToDo").style.top ="8%"; 
 })
+</script>
+
+<!-- 게시판 스크립트 -->
+<script type="text/javascript">
+    function boardJoin(){
+        let url = 'http://localhost:8001/board/page/join';
+        fetch(url)
+        .then(result => {
+            return result.text();
+        })
+        .then(text => {
+            document.querySelector('#board_view').innerHTML = text;
+        })
+    }
+
+    function postJoin(){
+        console.log('aa1');
+        let formData = document.querySelector('#join-form').serializeObject();
+        console.log(formData);
+        console.log('aa2');
+        return false;
+        /*
+        fetch('http://localhost:8001/board/auth/join',{
+            method: 'POST', // or 'PUT'
+            body: JSON.stringify(data), // data can be `string` or {object}!
+            headers:{
+            'Content-Type': 'application/json'
+            }
+        })
+        */
+     }
 </script>
 
 {% if flag == '0' %}
