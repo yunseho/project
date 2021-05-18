@@ -22,10 +22,10 @@
               <div class="count follower-count">{{followerCount}}</div>
             </div>
           <input id="my-id" type="hidden" value="{{user.id}}">
-          <a id="my-profile" href="/profile" class="btn">내 프로필</a>
-          <a id="logout" href="/auth/logout" class="btn">로그아웃</a>
+          <a id="my-profile" href="/board/profile" class="btn">내 프로필</a>
+          <a id="logout" href="/board/auth/logout" class="btn">로그아웃</a>
         {% else %}
-          <form id="login-form" action="/auth/login" method="post">
+          <form id="login-form" action="/board/auth/login" method="post">
             <div class="input-group">
               <label for="email">이메일</label>
               <input id="email" type="email" name="email" required autofocus>

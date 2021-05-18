@@ -131,29 +131,29 @@
     <div id="content">
         <div class="ToDo wt50" style="opacity: 1;">
             <h2 class="tb">게시판</h2>
-            <div id="board_view">
+            <div id="board_view" style="display:none;">
          
             </div>
         </div>
        
         <div class="join wt50" style="opacity: 1;">
             <h2 class="bt"> 회원가입/로그인</h2>
-            <div id="join_view">
+            <div id="join_view" style="display:none;">
          
             </div>
         </div>
    
         <div class="Weather wt50" style="opacity: 1;">
             <h2>오늘 날씨</h2>
-            <div id="weather_view">
+            <div id="weather_view" style="display:none;">
                 
             </div>
         </div>
 
         <div class="Home wt50">
-            <h2>테트리스 게임</h2>
+            <h2 class="top">테트리스 게임</h2>
             <div id="Home_view" style="display:none;">
-                <iframe src="http://localhost:3000/html/index.html" height=700 width=750 style="border:none;"></iframe>
+                <iframe src="http://localhost:8001/html/index.html" height=700 width=750 style="border:none;"></iframe>
             </div> 
         </div>
       
@@ -165,11 +165,35 @@
     </div>
 </div>
 <script type="text/javascript">
-document.querySelector(".Home").addEventListener('click', function () {
-    document.querySelector(".Home").style.width ="100%"
-    document.querySelector(".Home").style.height ="100%";
-    document.querySelector(".Home").style.top ="0%";
-    document.querySelector("#Home_view").style.display = 'block';
+document.querySelector(".top").addEventListener('click', function () {
+    if(event.type == 'click' && document.querySelector(".Home").style.width !== "100%"){
+        document.querySelector(".Home").style.width ="100%"
+        document.querySelector(".Home").style.height ="100%";
+        document.querySelector(".Home").style.top ="0%";
+        document.querySelector("#Home_view").style.display = 'block';
+    }else{
+        document.querySelector(".Home").style.width ="65%"
+        document.querySelector(".Home").style.height ="562px";
+        document.querySelector(".Home").style.top ="20%";
+        document.querySelector("#Home_view").style.display = 'none';
+
+        document.querySelector(".Weather").style.width ="65%";
+        document.querySelector(".Weather").style.height ="562px";
+        document.querySelector(".Weather").style.top="16%";
+        document.querySelector(".Weather").style.opacity="1";
+        document.querySelector(".Home").style.opacity="1";
+
+        document.querySelector(".join").style.width ="65%";
+        document.querySelector(".join").style.height ="562px";
+        document.querySelector(".join").style.top ="12%";
+        document.querySelector(".join").style.opacity="1";
+        document.querySelector("#join_view").style.display='none';
+
+        document.querySelector(".ToDo").style.width ="65%" ;
+        document.querySelector(".ToDo").style.height ="562px";
+        document.querySelector(".ToDo").style.top ="8%"; 
+    }
+   
     /*
     fetch('http://localhost:3000/saying') // new Promise 
     .then(data => {
@@ -181,37 +205,98 @@ document.querySelector(".Home").addEventListener('click', function () {
     })
     */
 });
-document.querySelector(".Weather").addEventListener('click', function () {
-    document.querySelector(".Weather").style.width ="100%";
-    document.querySelector(".Weather").style.height ="100%";
-    document.querySelector(".Weather").style.top ="0%";
-    document.querySelector(".Home").style.top="100%";
-    document.querySelector(".Home").style.opacity="0";
 
+document.querySelector(".Weather").addEventListener('click', function () {
+    if(event.type == 'click' && document.querySelector(".Weather").style.width !== "100%"){
+        document.querySelector(".Weather").style.width ="100%";
+        document.querySelector(".Weather").style.height ="100%";
+        document.querySelector(".Weather").style.top ="0%";
+        document.querySelector("#weather_view").style.display = "block";
+        document.querySelector(".Home").style.top="100%";
+        document.querySelector(".Home").style.opacity="0";
+    }else{
+        document.querySelector(".Home").style.width ="65%"
+        document.querySelector(".Home").style.height ="562px";
+        document.querySelector(".Home").style.top ="20%";
+        document.querySelector("#Home_view").style.display = 'none';
+
+
+        document.querySelector(".Weather").style.width ="65%";
+        document.querySelector(".Weather").style.height ="562px";
+        document.querySelector(".Weather").style.top="16%";
+        document.querySelector(".Weather").style.opacity="1";
+        document.querySelector("#weather_view").style.display = "none";
+        document.querySelector(".Home").style.opacity="1";
+
+        document.querySelector(".join").style.width ="65%";
+        document.querySelector(".join").style.height ="562px";
+        document.querySelector(".join").style.top ="12%";
+        document.querySelector(".join").style.opacity="1";
+        document.querySelector("#join_view").style.display='none';
+
+        document.querySelector(".ToDo").style.width ="65%" ;
+        document.querySelector(".ToDo").style.height ="562px";
+        document.querySelector(".ToDo").style.top ="8%"; 
+    }
+    
     fetch('http://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=20313df3cc7ccf0b314fd37d36732f83&lang=kr&&units=metric')
     .then(data=>{
         return data.json();
     })
     .then(json => {
-       
+        console.log(json);
+       let temp = json.main.temp;
+       let description = json.weather[0].description;
+       let clouds = json.clouds;
+    //    json.main.temp.toFixed(1);
+        // txt += `${날씨.toFixed(1)}℃ <br />`
+        // const box = document.querySelector('#weather_view');
+        // box.innerHTML = txt;
         
         console.log(json);
-        document.querySelector('#weather_view').innerHTML = json.main.temp;
+        document.querySelector('#weather_view').innerHTML = `${temp.toFixed(1)}℃,${description}`;
+        // document.querySelector('#weather_view').innerHTML = description;
     })
     
 });
 
 document.querySelector(".bt").addEventListener('click', function () {
-    document.querySelector(".join").style.width ="100%";
-    document.querySelector(".join").style.height ="100%";
-    document.querySelector(".join").style.top ="0%";
-    document.querySelector(".Home").style.top="100%";
-    document.querySelector(".Weather").style.top="100%";
-    document.querySelector(".Home").style.opacity="0";
-    document.querySelector(".Weather").style.opacity="0";
-    document.querySelector("#join_view").style.display='block'
+    if(event.type == 'click' && document.querySelector(".join").style.width !== "100%"){
+        document.querySelector(".join").style.width ="100%";
+        document.querySelector(".join").style.height ="100%";
+        document.querySelector(".join").style.top ="0%";
+        document.querySelector("#join_view").style.display = "block";
+        document.querySelector(".Home").style.top="100%";
+        document.querySelector(".Weather").style.top="100%";
+        document.querySelector(".Home").style.opacity="0";
+        document.querySelector(".Weather").style.opacity="0";
+        document.querySelector("#join_view").style.display='block'
 
-    fetch('http://localhost:3000/user')
+    }else{
+        document.querySelector(".Home").style.width ="65%"
+        document.querySelector(".Home").style.height ="562px";
+        document.querySelector(".Home").style.top ="20%";
+        document.querySelector("#Home_view").style.display = 'none';
+
+
+        document.querySelector(".Weather").style.width ="65%";
+        document.querySelector(".Weather").style.height ="562px";
+        document.querySelector(".Weather").style.top="16%";
+        document.querySelector(".Weather").style.opacity="1";
+        document.querySelector(".Home").style.opacity="1";
+
+        document.querySelector(".join").style.width ="65%";
+        document.querySelector(".join").style.height ="562px";
+        document.querySelector(".join").style.top ="12%";
+        document.querySelector(".join").style.opacity="1";
+        document.querySelector("#join_view").style.display='none';
+
+        document.querySelector(".ToDo").style.width ="65%" ;
+        document.querySelector(".ToDo").style.height ="562px";
+        document.querySelector(".ToDo").style.top ="8%"; 
+    }
+   
+    fetch('http://localhost:8001/user')
     .then(data => {
         console.log(data)
         return data.text();
@@ -249,6 +334,7 @@ document.querySelector(".tb").addEventListener('click', function (event) {
         document.querySelector(".ToDo").style.width ="100%";
         document.querySelector(".ToDo").style.height ="100%";
         document.querySelector(".ToDo").style.top ="0%";
+        document.querySelector("#board_view").style.display = "block";
         document.querySelector(".Home").style.top="100%";
         document.querySelector(".Home").style.opacity="0";
         document.querySelector(".Weather").style.top="100%";
@@ -287,6 +373,7 @@ document.querySelector(".tb").addEventListener('click', function (event) {
         document.querySelector(".ToDo").style.width ="65%" ;
         document.querySelector(".ToDo").style.height ="562px";
         document.querySelector(".ToDo").style.top ="8%"; 
+        document.querySelector("#board_view").style.display = "none";
     }
     
 
