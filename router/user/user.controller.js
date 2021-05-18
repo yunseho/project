@@ -1,5 +1,5 @@
 const {Board} = require('../../models');
-const { findOne } = require('../../models/board');
+const { findOne } = require('../../models');
 
 let login = (req,res)=>{
     res.render('login.html')
