@@ -20,6 +20,11 @@ passportConfig();
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.set('view engine', 'html');
+app.use(session({
+  secret:'aaa',
+  resave:false,
+  saveUninitialized:true,
+}))
 
 sequelize.sync({ force:false })
 .then(() => {

@@ -7,6 +7,24 @@ let login = (req,res)=>{
 let join = (req,res) => {
     res.render('join.html');
 }
+let login_check = async(req,res) =>{
+    let userid = req.body.userid;
+    let userpw = req.body.userpw;
+    let result = await Board.findOne({
+        where:{userid,userpw,}
+    })
+    if(result == null){
+        res.redirect('/?flag=0')
+    }else{
+        username = result.dataValues.name
+        req.session.userid = userid;
+        req.session.username = username
+        req.session.isLogin = true;
+        req.session.save(()=>{
+            res.redirect('/')
+        })
+    }
+}
 let userid_value = async(req,res) =>{
     let userid = req.query.userid;
     let flag = false;
@@ -79,4 +97,5 @@ module.exports = {
     join_check,
     userid_check,
     userid_value,
+    login_check,
 }

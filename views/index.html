@@ -7,8 +7,9 @@
     <title>Document</title>
     <link rel="stylesheet" href="index.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+   
     <script type="text/javascript">
-
+  
     function joinBtn(){
         fetch('http://localhost:3000/user/join') // new Promise 
         .then(data => {
@@ -19,6 +20,53 @@
         })
     }
 
+        function password_check(){
+        return pwd1.value != pwd2.value;
+    }
+        function password_check2(){
+            if(pwd1.value==''){
+                return true
+            }else{
+               return false
+            }
+        }
+
+    function btn20 (){
+        pwd1 = document.querySelector('#userpw');
+        pwd2 = document.querySelector('#userpw_check');
+        btn = document.querySelector('#login_submit');
+        login_frm = document.querySelector('#login_frm')
+
+        pwd_check = password_check();
+        pwd_check2 = password_check2();
+        if (pwd_check){
+            alert('비번이 일치하지 않습니다')
+            return
+        }
+        if (pwd_check2){
+            alert('비번을 입력하지 않았습니다')
+            return
+        }
+        console.log('asdfasdf')
+        login_frm.submit();//조건이 맞을때만
+    }
+
+        // if(pwd_check2==false){
+        //     console.log(pwd_check2);
+        //     alert('비번 안적었어.')
+        //     return 
+        // }
+        // if(pwd_check){
+        //     login_frm.submit();//조건이 맞을때만
+        // }
+        // else{
+        //     pwd1.value = '';
+        //     pwd2.value = '';
+        //     pwd1.focus();
+        //     alert('비번 다시적어 못봤어.');
+        // }
+        // }
+       
 //    async function kim(){
 //     const userid_msg = document.querySelector('#userid_msg')
 //     const userid = document.querySelector('#userid')
@@ -56,35 +104,36 @@
         // console.log(login_flag) //언디파인드
         if(login_flag){
             userid_msg.innerHTML = '올바른 아이디입니다.'
-            userid_msg.style.color = 'green';
+            userid_msg.style.color = 'white';
         }else{
             userid_msg.innerHTML = '중복된 아이디입니다.'
             userid_msg.style.color = 'black';
         }
     }
     </script>
+
 </head>
 <body>
     
 <div id="wrap">
     <div class="tt">
         {{userid}}<br/>
-        {{name}}
-        로그인접속유무
+        {{username}}<br/>
+       
     </div>
     <div id="content">
-        <div class="ToDo wt50">
+        <div class="ToDo wt50" style="opacity: 1;">
             <h2>게시판</h2>
         </div>
        
-        <div class="join wt50">
+        <div class="join wt50" style="opacity: 1;">
             <h2 class="bt"> 회원가입/로그인</h2>
             <div id="join_view">
          
             </div>
         </div>
    
-        <div class="Weather wt50">
+        <div class="Weather wt50" style="opacity: 1;">
             <h2>오늘 날씨</h2>
             <div id="weather_view">
                 
@@ -92,7 +141,7 @@
         </div>
 
         <div class="Home wt50">
-            <h2>오늘의 명언</h2>
+            <h2>테트리스 게임</h2>
             <div id="Home_view" style="display:none;">
             
             </div> 
@@ -126,6 +175,7 @@ document.querySelector(".Weather").addEventListener('click', function () {
     document.querySelector(".Weather").style.height ="100%";
     document.querySelector(".Weather").style.top ="0%";
     document.querySelector(".Home").style.top="100%";
+    document.querySelector(".Home").style.opacity="0";
 
     fetch('http://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=20313df3cc7ccf0b314fd37d36732f83&lang=kr&&units=metric')
     .then(data=>{
@@ -144,6 +194,8 @@ document.querySelector(".bt").addEventListener('click', function () {
     document.querySelector(".join").style.top ="0%";
     document.querySelector(".Home").style.top="100%";
     document.querySelector(".Weather").style.top="100%";
+    document.querySelector(".Home").style.opacity="0";
+    document.querySelector(".Weather").style.opacity="0";
     document.querySelector("#join_view").style.display='block'
 
     fetch('http://localhost:3000/user')
@@ -184,8 +236,11 @@ document.querySelector(".ToDo").addEventListener('click', function () {
     document.querySelector(".ToDo").style.height ="100%";
     document.querySelector(".ToDo").style.top ="0%";
     document.querySelector(".Home").style.top="100%";
+    document.querySelector(".Home").style.opacity="0";
     document.querySelector(".Weather").style.top="100%";
+    document.querySelector(".Weather").style.opacity="0";
     document.querySelector(".join").style.top="100%";
+    document.querySelector(".join").style.opacity="0";
 });
 
 document.querySelector("#userId").addEventListener('click',()=>{
@@ -194,21 +249,30 @@ document.querySelector("#userId").addEventListener('click',()=>{
     document.querySelector(".Home").style.top ="20%";
     document.querySelector("#Home_view").style.display = 'none';
 
+
     document.querySelector(".Weather").style.width ="65%";
     document.querySelector(".Weather").style.height ="562px";
     document.querySelector(".Weather").style.top="16%";
+    document.querySelector(".Weather").style.opacity="1";
+    document.querySelector(".Home").style.opacity="1";
 
     document.querySelector(".join").style.width ="65%";
     document.querySelector(".join").style.height ="562px";
     document.querySelector(".join").style.top ="12%";
+    document.querySelector(".join").style.opacity="1";
     document.querySelector("#join_view").style.display='none';
 
-    document.querySelector(".ToDo").style.width ="65%";
+    document.querySelector(".ToDo").style.width ="65%" ;
     document.querySelector(".ToDo").style.height ="562px";
     document.querySelector(".ToDo").style.top ="8%"; 
 })
 </script>
 
+{% if flag == '0' %}
+<script type="text/javascript">
+    alert('아이디와 패스워드가 일치하지 않습니다.')
+</script>
+{% endif %}
 
 
 </body>
