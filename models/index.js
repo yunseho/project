@@ -6,6 +6,7 @@ const config = require('../config/config.json')[env];
 const User = require('./user');
 const Post = require('./post');
 const Hashtag = require('./hashtag');
+const Board = require('./board');
 
 const db = {};
 const sequelize = new Sequelize(
@@ -21,10 +22,14 @@ db.sequelize = sequelize;
 db.User = User;
 db.Post = Post;
 db.Hashtag = Hashtag;
+db.Board = Board;
 
 User.init(sequelize);
 Post.init(sequelize);
 Hashtag.init(sequelize);
+
+Board.init(sequelize);
+Board.associate(db)
 
 User.associate(db);
 Post.associate(db);
