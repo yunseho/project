@@ -22,10 +22,14 @@ db.sequelize = sequelize;
 db.User = User;
 db.Post = Post;
 db.Hashtag = Hashtag;
+db.Board = Board;
 
 User.init(sequelize);
 Post.init(sequelize);
 Hashtag.init(sequelize);
+
+Board.init(sequelize);
+Board.associate(db)
 
 User.associate(db);
 Post.associate(db);
