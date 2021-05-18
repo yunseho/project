@@ -1,11 +1,22 @@
 const express = require('express');
-const app = express();
+const cookieParser = require('cookie-parser');
+const morgan = require('morgan');
+const path = require('path');
+const session = require('express-session');
 const nunjucks = require('nunjucks');
-const bodyParser = require('body-parser');
-const {sequelize} = require('./models');
-const router = require('./router')
-const {User} = require('./models');
+const dotenv = require('dotenv');
+const passport = require('passport');
+const bodyParser = require('body-parser')
 
+dotenv.config();
+const app = express();
+const router = require('./router')
+
+const { sequelize } = require('./models');
+const passportConfig = require('./passport/index');
+
+
+passportConfig();
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.set('view engine', 'html');
@@ -22,9 +33,30 @@ sequelize.sync({ force:false })
 nunjucks.configure('views', {
     express: app
 });
- 
+
+
+app.use(morgan('dev'));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/img', express.static(path.join(__dirname, 'uploads')));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(session({
+  resave: false,
+  saveUninitialized: false,
+  secret: process.env.COOKIE_SECRET,
+  cookie: {
+    httpOnly: true,
+    secure: false,
+  },
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 app.use(express.json());
 app.use('/',router);
+
 
 app.listen(3000,()=>{
     console.log(`start server 3000`);
