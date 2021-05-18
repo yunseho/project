@@ -21,7 +21,7 @@
         </div>
       {% endif %}
       <div class="twits">
-        <form id="hashtag-form" action="/hashtag">
+        <form id="hashtag-form" action="/board/hashtag">
           <input type="text" name="hashtag" placeholder="태그 검색">
           <button class="btn">검색</button>
         </form>
@@ -50,7 +50,7 @@
         const formData = new FormData();
         console.log(this, this.files);
         formData.append('img', this.files[0]);
-        axios.post('/post/img', formData)
+        axios.post('/board/post/img', formData)
           .then((res) => {
             document.getElementById('img-url').value = res.data.url;
             document.getElementById('img-preview').src = res.data.url;
@@ -68,7 +68,7 @@
           const userId = tag.parentNode.querySelector('.twit-user-id').value;
           if (userId !== myId.value) {
             if (confirm('팔로잉하시겠습니까?')) {
-              axios.post(`/user/${userId}/follow`)
+              axios.post(`/board/user/${userId}/follow`)
                 .then(() => {
                   location.reload();
                 })
