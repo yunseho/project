@@ -119,7 +119,9 @@
     <div class="tt">
         {{userid}}<br/>
         {{username}}<br/>
-       
+        {% if isLogin %}
+        <a href='./user/logout'>로그아웃합시다</a>
+        {% endif %}
     </div>
     <div id="content">
         <div class="ToDo wt50" style="opacity: 1;">

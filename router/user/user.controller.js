@@ -1,3 +1,4 @@
+
 const {Board} = require('../../models');
 const { findOne } = require('../../models/board');
 
@@ -6,6 +7,13 @@ let login = (req,res)=>{
 }
 let join = (req,res) => {
     res.render('join.html');
+}
+
+let logout = (req,res)=>{
+    delete req.session.userid
+    delete req.session.username
+    delete req.session.isLogin
+    res.redirect('/')
 }
 let login_check = async(req,res) =>{
     let userid = req.body.userid;
@@ -98,4 +106,5 @@ module.exports = {
     userid_check,
     userid_value,
     login_check,
+    logout,
 }
