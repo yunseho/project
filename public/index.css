@@ -20,7 +20,12 @@ ul,li{
     height: 937px;
     background: linear-gradient( to bottom, #fff, #9da3b1 );
 }
-
+.tt{
+    position: absolute;
+    top: 30%;
+    color: darkblue;
+    font-size: 20px;
+}
 .wt50{
     width: 65%;
     height: 562px;

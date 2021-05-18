@@ -36,11 +36,11 @@ module.exports = class board extends Sequelize.Model{
             },
             subject:{
                 type:Sequelize.STRING(100),
-                allowNull:false,
+                allowNull:true,
             },
             content:{ 
                 type:Sequelize.TEXT,
-                allowNull:false,
+                allowNull:true,
             },
             created_at:{
                 type:Sequelize.DATE,

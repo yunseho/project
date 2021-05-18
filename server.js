@@ -11,8 +11,10 @@ const bodyParser = require('body-parser')
 dotenv.config();
 const app = express();
 const router = require('./router')
+
 const { sequelize } = require('./models');
 const passportConfig = require('./passport/index');
+
 
 passportConfig();
 app.use(express.static('public'));
@@ -27,9 +29,11 @@ sequelize.sync({ force:false })
     console.error(err);
 });
 
+
 nunjucks.configure('views', {
     express: app
 });
+
 
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -48,6 +52,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 app.use(express.json());
 app.use('/',router);

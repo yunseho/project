@@ -1,4 +1,4 @@
-create database homepage;
+create database project;
 use homepage;
 create table board( 
 idx int(11) not null auto_increment primary key,

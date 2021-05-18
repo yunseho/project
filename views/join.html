@@ -1,10 +1,13 @@
 
-    <div id="user_join">
+<div id="user_join">
         
-    <form action="/user" method="post" class="con">
+    <form action="/user/join_check" method="post" class="con">
         <ul>
             <li>아이디</li>
-            <li><input type="text" name="userid"></li>
+            <li><input type="text" name="userid" id="userid" onfocusout="userid_check()"></li>
+            <p id="userid_msg">
+
+            </p>
         </ul>
         <ul>
             <li>비밀번호</li>
@@ -16,7 +19,7 @@
         </ul>
         <ul>
             <li>이름</li>
-            <li><input type="text" name="username"></li>
+            <li><input type="text" name="name"></li>
         </ul>
         <ul>
             <li>성별</li>
@@ -26,6 +29,8 @@
             </li>
         </ul>
         <input type="submit" value="회원가입완료">
-        <a href="/">메인페이지</a>
+   
     </form>
+
 </div>
+
