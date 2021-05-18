@@ -1,10 +1,32 @@
 const {Board} = require('../../models');
+const { findOne } = require('../../models/board');
 
 let login = (req,res)=>{
     res.render('login.html')
 }
 let join = (req,res) => {
     res.render('join.html');
+}
+let userid_value = async(req,res) =>{
+    let userid = req.query.userid;
+    let flag = false;
+    let result = await Board.findOne({
+        where:{userid} //db에 들어갔는지 확인
+    })
+    if(result == undefined){
+        flag = true
+    }else{
+        flag = false
+    }
+    console.log(userid)
+    console.log(result)
+    res.json({
+        login:flag,
+        userid,
+    })
+   
+    
+    
 }
 let join_check = async (req,res) => {
    
@@ -29,9 +51,9 @@ let join_check = async (req,res) => {
     res.redirect('/');
 }
 let userid_check = async (req,res)=>{
-    console.log(userid);
+    
     let userid = req.query.userid;
-    console.log(req.query.userid);
+   
     let flag = false;
     let result = await Board.findOne({
         where:{ userid }
@@ -56,4 +78,5 @@ module.exports = {
     join,
     join_check,
     userid_check,
+    userid_value,
 }

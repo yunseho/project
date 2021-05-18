@@ -18,14 +18,42 @@
             document.querySelector("#join_view").innerHTML = text;
         })
     }
-     const userid = document.querySelector('#userid')
+
+//    async function kim(){
+//     const userid_msg = document.querySelector('#userid_msg')
+//     const userid = document.querySelector('#userid')
+//         let gg = await fetch(`http://localhost:3000/user/userid_value?userid=${userid.value}`)
+//         console.log(userid)
+//         .then(data =>{
+//             return data.json();
+//             console.log(data.json())
+//         })
+        
+//         .then(json =>{
+//             login = gg.json.login;
+//             if(login){
+//                 userid_msg.innerHTML = '사용가능 아이디'
+//             }else{
+//                 userid_msg.innerHTML = '불가능 아이디'
+//             }
+//         })
+//     }
+     
     async function userid_check(){
-        let wow = await axios.get(`http://localhost:3000/user/join?userid=${userid.value}`);
-        console.log(wow);
+        const userid_msg = document.querySelector('#userid_msg')
+        console.log(userid_msg)
+        const userid = document.querySelector('#userid')
+        console.log(userid)
+        console.log('aaa')
+        
+        let wow = await axios.get(`http://localhost:3000/user/userid_value?userid=${userid.value}`);
+        console.log(`http://localhost:3000/user/userid_value?userid=${userid.value}`)
+        console.log(wow)
+      
         //ajax로 가져왔다 가정 중복 false 중복아니다 true
         //서버에 보내서 데이터를 조회하고 결과가 조회되면 트루 안되면 펄스 중복이냐 아니냐
         login_flag = wow.data.login;
-        console.log(login_flag)
+        // console.log(login_flag) //언디파인드
         if(login_flag){
             userid_msg.innerHTML = '올바른 아이디입니다.'
             userid_msg.style.color = 'green';
