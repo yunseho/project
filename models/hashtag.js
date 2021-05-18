@@ -1,3 +1,4 @@
+/**/
 const Sequelize = require('sequelize');
 
 module.exports = class Hashtag extends Sequelize.Model {
