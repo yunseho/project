@@ -1,6 +1,6 @@
 const express = require('express');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
-const { Post, User, Hashtag } = require('../models');
+const { Post, User, Hashtag } = require('../../models');
 
 const router = express.Router();
 
@@ -13,11 +13,11 @@ router.use((req, res, next) => {
 });
 
 router.get('/profile', isLoggedIn, (req, res) => {
-  res.render('profile', { title: '내 정보 - NodeBird' });
+  res.render('./board/profile', { title: '내 정보 - NodeBird' });
 });
 
 router.get('/join', isNotLoggedIn, (req, res) => {
-  res.render('join', { title: '회원가입 - NodeBird' });
+  res.render('./board/join', { title: '회원가입 - NodeBird' });
 });
 
 router.get('/', async (req, res, next) => {
@@ -29,7 +29,7 @@ router.get('/', async (req, res, next) => {
       },
       order: [['createdAt', 'DESC']],
     });
-    res.render('main', {
+    res.render('board/main', {
       title: 'NodeBird',
       twits: posts,
     });
@@ -51,7 +51,7 @@ router.get('/hashtag', async (req, res, next) => {
       posts = await hashtag.getPosts({ include: [{ model: User }] });
     }
 
-    return res.render('main', {
+    return res.render('board/main', {
       title: `${query} | NodeBird`,
       twits: posts,
     });
