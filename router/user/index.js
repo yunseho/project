@@ -4,6 +4,12 @@ const controller = require('./user.controller');
 
 
 
+
+router.get('/join',controller.join)
 router.get('/',controller.login);
+router.post('/join_check',controller.join_check);
+router.get('/userid_check',controller.userid_check);
+
+
 
 module.exports = router;

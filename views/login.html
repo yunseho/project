@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="index.css">
+    <script src = '/js/login.js'></script>
 </head>
 <body>
+    
     <form action="/" method="post">
     <div id="login">
         <ul>
@@ -23,40 +25,8 @@
     </div>
 </form>
 
-   
-<button class="trigger" onclick="on()">회원가입</button>
-<input type="button" value="회원가입" onclick="at();">
+<button class="bt_1" onclick="joinBtn()">회원가입</button>
 
-    <div id="view">
 
-    </div>
+
     
-    
-    <script type="text/javascript">
-
-
-
-
-  let bt = function at() {
-    console.log('asdas')
-    document.querySelector(".join").style.width ="100%";
-    document.querySelector(".join").style.height ="100%";
-    document.querySelector(".join").style.top ="0%";
-    document.querySelector(".Home").style.top="100%";
-    document.querySelector(".Weather").style.top="100%";
-    fetch('http://localhost:3000/user_join')
-    .then(data => {
-        console.log(fetch('http://localhost:3000/user_join'))
-        return data.text();
-    })
-    .then(text => {
-        console.log(text)
-        document.querySelector("#join_view").innerHTML = text;
-    })
-  }
-
-
-
-    </script>
-</body>
-</html>

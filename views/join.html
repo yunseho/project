@@ -1,17 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="index.css">
-</head>
-<body>
-    <form action="/user" method="post">
+
+<div id="user_join">
+        
+    <form action="/user/join_check" method="post" class="con">
         <ul>
             <li>아이디</li>
-            <li><input type="text" name="userid"></li>
+            <li><input type="text" name="userid" id="userid" onfocusout="
+                fetch(index).then(function(response){
+                    response.text().then(function(text){
+                        document.querySelector('userid').innerHTML =text;
+                    })
+                }) "></li>
+            <p id="userid_msg">
+
+            </p>
         </ul>
         <ul>
             <li>비밀번호</li>
@@ -23,7 +24,7 @@
         </ul>
         <ul>
             <li>이름</li>
-            <li><input type="text" name="username"></li>
+            <li><input type="text" name="name"></li>
         </ul>
         <ul>
             <li>성별</li>
@@ -33,6 +34,8 @@
             </li>
         </ul>
         <input type="submit" value="회원가입완료">
+   
     </form>
-</body>
-</html>
+
+</div>
+

@@ -7,10 +7,15 @@ const saying = require('./saying');
 
 
 
-router.use('/',main);
+
 router.use('/user',user);
+router.use('/',main);
 router.use('/board',board);
 router.use('/saying',saying);
+
+
+
+
 
 
 module.exports = router;

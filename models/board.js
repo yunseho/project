@@ -1,5 +1,9 @@
 /*
 게시글 번호
+id
+pw
+name
+gender
 작성자 
 회원이 사용할 경우 userid값 받기
 제목
@@ -13,17 +17,30 @@ const Sequelize = require('sequelize');
 module.exports = class board extends Sequelize.Model{
     static init(sequelize){
         return super.init({
-            subject:{
-                type:Sequelize.STRING(100),
+            userid:{
+                type:Sequelize.STRING(20),
+                allowNull:false,
+                unique:true,
+            },
+            userpw:{
+                type:Sequelize.STRING(50),
                 allowNull:false,
             },
             name:{
                 type:Sequelize.STRING(50),
                 allowNull:false,
             },
+            gender:{
+                type:Sequelize.BOOLEAN,
+                allowNull:false,
+            },
+            subject:{
+                type:Sequelize.STRING(100),
+                allowNull:true,
+            },
             content:{ 
                 type:Sequelize.TEXT,
-                allowNull:false,
+                allowNull:true,
             },
             created_at:{
                 type:Sequelize.DATE,
@@ -33,7 +50,6 @@ module.exports = class board extends Sequelize.Model{
             hit:{
                type:Sequelize.INTEGER(11),
                defaultValue:0,
-               
             },
         },{
             sequelize,

@@ -20,7 +20,12 @@ ul,li{
     height: 937px;
     background: linear-gradient( to bottom, #fff, #9da3b1 );
 }
-
+.tt{
+    position: absolute;
+    top: 30%;
+    color: darkblue;
+    font-size: 20px;
+}
 .wt50{
     width: 65%;
     height: 562px;
@@ -61,6 +66,7 @@ ul,li{
     top: 12%;
     box-shadow:0px 7px 15px 1px rgba(63, 60, 60, 0.500)
 }
+
 .join:hover{
     cursor: pointer;
     top: 11.5%;   

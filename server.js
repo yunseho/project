@@ -4,6 +4,7 @@ const nunjucks = require('nunjucks');
 const bodyParser = require('body-parser');
 const {sequelize} = require('./models');
 const router = require('./router')
+const {User} = require('./models');
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -17,9 +18,11 @@ sequelize.sync({ force:false })
     console.error(err);
 });
 
+
 nunjucks.configure('views', {
     express: app
 });
+ 
 app.use(express.json());
 app.use('/',router);
 
